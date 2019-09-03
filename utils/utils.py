@@ -20,23 +20,17 @@ def dequantize(feat_matrix, max_quantized_value=2, min_quantized_value=-2):
     return feat_matrix * scalar + bias
 
 
-def resize_axis(tensor, axis, new_size, fill_value=0):
+def pad_if_necessary(tensor, new_size):
     """
-        Truncates or pads a tensor to new_size on on a given axis.
+    Pads 0 arrays along 0th dimension if tensor.shape[0] < new_size
+    :param tensor: ndarray of shape (x, feature_size)
+    :param new_size: new size along 0th dim
+    :return: ndarray of shape (new_size, feature_size)
+    """
 
-        Truncate or extend tensor such that tensor.shape[axis] == new_size. If the
-        size increases, the padding will be performed at the end, using fill_value.
+    if tensor.shape[0] > new_size:
+        return tensor[:new_size, :]
 
-        Args:
-            tensor: The tensor to be resized.
-            axis: An integer representing the dimension to be sliced.
-            new_size: An integer or 0d tensor representing the new value for
-              tensor.shape[axis].
-            fill_value: Value to use to fill any new entries in the tensor. Will be cast
-              to the type of tensor.
-
-        Returns:
-            The resized tensor.
-      """
-
-    raise NotImplementedError
+    remaining = new_size - tensor.shape[0]
+    zero_arr = np.zeros(tensor.shape[1]).reshape(-1, tensor.shape[1])
+    return np.concatenate((tensor, np.repeat(zero_arr, remaining, axis=0)), axis=0)

@@ -28,29 +28,26 @@ class VideoIterable:
 
     def get_generator(self):
         for file in self.record_files:
-            self.process_file(file)
-
-    def process_file(self, file):
-        # Goes through each example/video in a file and yields the data
-        for example in tf.python_io.tf_record_iterator(file):
-            example = tf.train.SequenceExample.FromString(example)
-            self.process_example(example)
+            for example in tf.python_io.tf_record_iterator(file):
+                example = tf.train.SequenceExample.FromString(example)
+                yield self.process_example(example)
 
     def process_example(self, example):
         # example represents one video
         example_data = {}
 
         if self.segment_labels:
-            example_data["segment_indices"] = np.array(list(set(example.context.feature['segment_labels'].int64_list.value)))
+            example_data["segment_indices"] = np.array(list(example.context.feature['segment_labels'].int64_list.value))
             example_data["segment_scores"] = np.array(example.context.feature['segment_scores'].float_list.value)
-            example_data["segment_start_times"] = np.array(list(set(example.context.feature['segment_start_times'].int64_list.value)))
-            example_data["labels"] = np.array(list(set(example.context.feature['labels'].int64_list.value)))
+            example_data["segment_start_times"] = np.array(list(example.context.feature['segment_start_times'].int64_list.value))
+            example_data["labels"] = np.array(list(example.context.feature['labels'].int64_list.value))
             example_data["vid"] = example.context.feature['id'].bytes_list.value[0].decode(encoding='UTF-8')
 
             assert(len(example_data["segment_indices"]) == len(example_data["segment_scores"]))
             assert(len(example_data["segment_indices"]) == len(example_data["segment_start_times"]))
         else:
             example_data["labels"] = np.array(list(set(example.context.feature['labels'].int64_list.value)))
+            example_data["vid"] = example.context.feature['id'].bytes_list.value[0].decode(encoding='UTF-8')
 
         num_frames = len(example.feature_lists.feature_list['audio'].feature)
 
@@ -80,7 +77,7 @@ class VideoIterable:
         video_matrix = np.concatenate((rgb_matrix, audio_matrix), axis=1)
         transformed_data = self.transform_data(video_matrix, example_data)
 
-        yield transformed_data
+        return transformed_data
 
     def transform_data(self, video_matrix, example_data):
 
@@ -98,7 +95,7 @@ class VideoIterable:
             # array of tuples like, with first value=segment time indexes and second value=class number
             segment_scores = torch.from_numpy(segment_scores)
             # batch_labels dim: (60, num_classes)
-            label_indices = torch.from_numpy(np.stack([start_times_idxs, segment_indices], axis=-1))
+            label_indices = torch.from_numpy(np.stack([start_times_idxs, segment_indices], axis=-1)).long()
             batch_labels = torch.sparse.FloatTensor(label_indices.t(), segment_scores,
                                                     torch.Size([60, self.num_classes])).to_dense()
             batch_labels = torch.clamp(batch_labels, 0, 1)
@@ -108,43 +105,45 @@ class VideoIterable:
             batch_label_weights = torch.clamp(batch_label_weights, 0, 1)
 
             # label mask: dim: (60,1)
-            label_mask = torch.from_numpy(np.stack([start_times_idxs, np.zeros_like(start_times_idxs)], axis=-1))
-            batch_label_masks = torch.sparse.FloatTensor(label_mask.t(), torch.ones_like(start_times_idxs),
+            label_mask = torch.from_numpy(np.stack([start_times_idxs, np.zeros_like(start_times_idxs)], axis=-1)).long()
+            batch_label_masks = torch.sparse.FloatTensor(label_mask.t(),
+                                                         torch.ones_like(torch.from_numpy(start_times_idxs)),
                                                          torch.Size([60, 1])).to_dense()
             batch_label_masks = torch.clamp(batch_label_masks, 0, 1)
 
             total_segments = self.max_frames // self.segment_size
             batch_frames = torch.repeat_interleave(torch.tensor([self.segment_size]), total_segments).view(
                 (total_segments, 1))
-            batch_video_ids = torch.repeat_interleave(torch.tensor([vid]), total_segments).view((total_segments, 1))
 
             # video_labels dim: (num_classes,)
-            batch_video_labels = torch.sparse.FloatTensor(video_labels, torch.ones_like(video_labels)).to_dense().view(
-                self.num_classes)
+            video_labels = torch.from_numpy(video_labels)
+            batch_video_labels = torch.sparse.FloatTensor(video_labels.unsqueeze(0), torch.ones_like(video_labels),
+                                     torch.Size([self.num_classes])).to_dense()
             batch_video_labels = torch.clamp(batch_video_labels, 0, 1)
 
             transformed_data = {
-                "video_ids": batch_video_ids.unsqueeze(0),
-                "video_matrix": batch_video_matrix.unsqueeze(0),
-                "video_labels": batch_video_labels.unsqueeze(0),
-                "video_num_frames": torch.tensor([num_frames]).unsqueeze(0),
-                "segment_num_frames": batch_frames.unsqueeze(0),
-                "segment_labels": batch_labels.unsqueeze(0),
-                "label_weights": batch_label_weights.unsqueeze(0),
-                "label_masks": batch_label_masks.unsqueeze(0),
+                "video_ids": np.array([vid]),
+                "video_matrix": batch_video_matrix,
+                "video_labels": batch_video_labels,
+                "video_num_frames": torch.tensor([num_frames]),
+                "segment_num_frames": batch_frames,
+                "segment_labels": batch_labels,
+                "label_weights": batch_label_weights,
+                "label_masks": batch_label_masks,
             }
         else:
             video_labels = example_data["labels"]
             vid          = example_data["vid"]
-            batch_video_labels = torch.sparse.FloatTensor(video_labels, torch.ones_like(video_labels)).to_dense().view(
-                self.num_classes)
+            video_labels = torch.from_numpy(video_labels)
+            batch_video_labels = torch.sparse.FloatTensor(video_labels.unsqueeze(0), torch.ones_like(video_labels),
+                                     torch.Size([self.num_classes])).to_dense()
             batch_video_labels = torch.clamp(batch_video_labels, 0, 1)
 
             transformed_data = {
-                "video_ids": torch.tensor([vid]).unsqueeze(0),
-                "video_matrix": batch_video_matrix.unsqueeze(0),
-                "video_labels": batch_video_labels.unsqueeze(0),
-                "video_num_frames": torch.tensor([num_frames]).unsqueeze(0),
+                "video_ids": np.array([vid]),
+                "video_matrix": batch_video_matrix,
+                "video_labels": batch_video_labels,
+                "video_num_frames": torch.tensor([num_frames]),
                 "segment_num_frames": None,
                 "segment_labels": None,
                 "label_weights": None,
@@ -152,13 +151,6 @@ class VideoIterable:
             }
 
         return transformed_data
-
-
-class Generators:
-
-    @staticmethod
-    def video_generator(record_files):
-        raise NotImplementedError
 
 
 class TFRecordFrameDataSet(torch.utils.data.IterableDataset):
@@ -173,7 +165,8 @@ class TFRecordFrameDataSet(torch.utils.data.IterableDataset):
                  segment_size=5
                  ):
         super(TFRecordFrameDataSet).__init__()
-        self.record_files = shuffle(record_files)
+        shuffle(record_files)
+        self.record_files = record_files
         self.total_files = len(record_files)
         self.num_classes = num_classes
         self.feature_sizes = feature_sizes
@@ -206,3 +199,41 @@ class TFRecordFrameDataSet(torch.utils.data.IterableDataset):
                                             self.segment_size)
 
         return video_generator_obj.get_generator()
+
+    def get_collate_fn(self):
+
+        segment_labels = self.segment_labels
+
+        def custom_collate_fn(batch_samples):
+            # batch_data will be array of transformed_data ^ dicts
+            if segment_labels:
+                attributes = ["video_ids", "video_matrix", "video_labels",
+                              "video_num_frames", "segment_num_frames", "segment_labels",
+                              "label_weights", "label_masks"]
+            else:
+                attributes = ["video_ids", "video_matrix", "video_labels", "video_num_frames"]
+
+            collated_data = {}
+
+            for name in attributes:
+                running_list = []
+                for item in batch_samples:
+                    running_list.append(item[name])
+                if name != "video_ids":
+                    collated_data[name] = torch.stack(running_list, dim=0)
+                else:
+                    collated_data[name] = np.stack(running_list, axis=0)
+
+            return collated_data
+
+        return custom_collate_fn
+
+
+if __name__ == '__main__':
+    import glob
+    from tqdm import tqdm
+    ds = TFRecordFrameDataSet(glob.glob("/data/yt8m/v3/frame/validate*.tfrecord"), segment_labels=True)
+    dl = torch.utils.data.DataLoader(ds, batch_size=4, collate_fn=ds.get_collate_fn(), num_workers=8)
+    for elem in tqdm(iter(dl)):
+        print(elem)
+        break

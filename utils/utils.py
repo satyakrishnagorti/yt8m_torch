@@ -1,3 +1,5 @@
+import os
+import torch
 import numpy as np
 
 
@@ -34,3 +36,38 @@ def pad_if_necessary(tensor, new_size):
     remaining = new_size - tensor.shape[0]
     zero_arr = np.zeros(tensor.shape[1]).reshape(-1, tensor.shape[1])
     return np.concatenate((tensor, np.repeat(zero_arr, remaining, axis=0)), axis=0)
+
+
+def find_class_by_name(name, modules):
+    """
+        Searches the provided modules for the named class and returns it.
+    """
+    modules = [getattr(module, name, None) for module in modules]
+    return next(a for a in modules if a)
+
+
+def get_feature_similarity_matrix(batch_video_matrix, batch_num_frames, device, normalize=True):
+
+    batch_size = batch_video_matrix.shape[0]
+
+    batch_video_norm = torch.norm(batch_video_matrix, dim=2, keepdim=True)
+    video_normed_matrix = batch_video_matrix / batch_video_norm
+    video_normed_matrix[video_normed_matrix != video_normed_matrix] = 0
+    A = torch.bmm(video_normed_matrix, video_normed_matrix.permute(0, 2, 1))
+
+    if normalize:
+        sqrt_num_frames = torch.sqrt(batch_num_frames.double().to(device))
+        Is = torch.eye(300).repeat(batch_size, 1, 1).double().to(device)
+        Ds = 1/sqrt_num_frames.squeeze(1)[:, None, None]
+        Ds = Is * Ds
+        A_norm = torch.bmm(Ds, torch.bmm(A, Ds))
+        return A_norm
+
+    return A
+
+
+def save_model(model, save_dir, save_file='model', step_count=0):
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
+    path = os.path.join(save_dir, save_file + "_" + str(step_count) + ".torch")
+    torch.save(model.state_dict(), path)

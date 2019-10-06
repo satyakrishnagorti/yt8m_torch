@@ -64,24 +64,25 @@ class VideoIterable:
             else:
                 break
 
-        rgb_matrix = utils.pad_if_necessary(np.array(rgb_frames).reshape(-1, self.feature_sizes[0]),
+        rgb_matrix = utils.dequantize(np.array(rgb_frames).reshape(-1, self.feature_sizes[0]))
+        audio_matrix = utils.dequantize(np.array(audio_frames).reshape(-1, self.feature_sizes[1]))
+        num_frames = rgb_matrix.shape[0]
+
+        rgb_matrix = utils.pad_if_necessary(rgb_matrix,
                                             self.max_frames)
-        audio_matrix = utils.pad_if_necessary(np.array(audio_frames).reshape(-1, self.feature_sizes[1]),
+        audio_matrix = utils.pad_if_necessary(audio_matrix,
                                               self.max_frames)
 
         assert(rgb_matrix.shape[0] == self.max_frames)
         assert(audio_matrix.shape[0] == self.max_frames)
 
-        rgb_matrix = utils.dequantize(rgb_matrix)
-        audio_matrix = utils.dequantize(audio_matrix)
         video_matrix = np.concatenate((rgb_matrix, audio_matrix), axis=1)
-        transformed_data = self.transform_data(video_matrix, example_data)
+        transformed_data = self.transform_data(video_matrix, example_data, num_frames)
 
         return transformed_data
 
-    def transform_data(self, video_matrix, example_data):
+    def transform_data(self, video_matrix, example_data, num_frames):
 
-        num_frames = video_matrix.shape[0]
         batch_video_matrix = torch.from_numpy(video_matrix)
 
         if self.segment_labels:
@@ -233,7 +234,11 @@ if __name__ == '__main__':
     import glob
     from tqdm import tqdm
     ds = TFRecordFrameDataSet(glob.glob("/data/yt8m/v3/frame/validate*.tfrecord"), segment_labels=True)
-    dl = torch.utils.data.DataLoader(ds, batch_size=4, collate_fn=ds.get_collate_fn(), num_workers=8)
-    for elem in tqdm(iter(dl)):
+    # dl = torch.utils.data.DataLoader(ds, batch_size=4, collate_fn=ds.get_collate_fn(), num_workers=8)
+    # for elem in tqdm(iter(dl)):
+    #     print(elem)
+        # break
+
+    for elem in ds:
         print(elem)
-        break
+

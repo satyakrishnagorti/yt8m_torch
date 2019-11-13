@@ -41,7 +41,7 @@ parser.add_argument('--validate-after-epoch', type=bool, default=False)
 parser.add_argument('--top-n', type=int, default=10000)
 parser.add_argument('--validate-file', type=str, default='/data/yt8m/v3valid.csv')
 parser.add_argument('--save_every', type=int, default=100)
-parser.add_argument('--save-dir', type=str, default='data/gcn_conv_model')
+parser.add_argument('--save-dir', type=str, default='data/gcn_conv_model_run2')
 
 
 def get_val_data_loader(args, validate_file=None):
@@ -50,6 +50,7 @@ def get_val_data_loader(args, validate_file=None):
         val_files = [l.strip() for l in lines]
         files = glob.glob(args.val_data_pattern)
         files = [f for f in files if f.split('/')[-1] in val_files]
+        print("Len of val files:", len(files))
     else:
         files = glob.glob(args.val_data_pattern)
 
@@ -66,7 +67,9 @@ def get_train_data_loader(args, validate_file=None):
         lines = open(validate_file, 'r')
         val_files = [l.strip() for l in lines]
         files = glob.glob(args.train_data_pattern)
+        print("Before Len:", len(files))
         files = [f for f in files if f.split('/')[-1] not in val_files]
+        print("total Len:", len(files))
     else:
         files = glob.glob(args.train_data_pattern)
     record_dataset = TFRecordFrameDataSet(files, segment_labels=args.segment_labels)
@@ -128,11 +131,11 @@ def train_loop(model, data_loader, val_obj, args, device):
                     if mean_ap > best_map:
                         best_map = mean_ap
                         print("Saving Model")
-                        utils.save_model(model, args.save_dir, step_count)
+                        utils.save_model(model, args.save_dir, save_file="model", step_count=step_count)
 
             if args.save_every > 0 and (step_count % args.save_every) == 0:
                 print("Saving Model")
-                utils.save_model(model, args.save_dir, step_count)
+                utils.save_model(model, args.save_dir, save_file="model", step_count=step_count)
 
         if args.validate_after_epoch:
             print("Running validation")
@@ -169,6 +172,7 @@ def get_val_obj(args, model, device):
     val_obj = Validation(val_data_loader, model, device, label_cache="/data/yt8m/v3_label_cache")
     return val_obj
 
+
 def main():
     args = parser.parse_args()
     print(args)
@@ -177,7 +181,7 @@ def main():
     # model_class = utils.find_class_by_name(args.model, [graph])
 
     model = graph.GraphModel(vocab_size=args.vocab_size)
-    data_loader = get_train_data_loader(args)
+    data_loader = get_train_data_loader(args, args.validate_file)
     val_obj = get_val_obj(args, model, device)
     train_loop(model, data_loader, val_obj, args, device)
 

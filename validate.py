@@ -33,7 +33,8 @@ class Validation:
             f.write(str(c) + ',' + segments_str.strip() + '\n')
             f.flush()
 
-    def validation_pipeline(self, generate_blend_file=False, top_n=100_000, output_file="data/submission.csv"):
+
+    def validation_helper(self, generate_blend_file=False, top_n=100_000, output_file="data/submission.csv"):
 
         final_id_to_class = []
         final_video_vals = []
@@ -86,11 +87,11 @@ class Validation:
         if generate_blend_file:
             print("generating blend file")
             final_id_to_class, final_video_vals = self.add_missing_values(final_id_to_class, final_video_vals,
-                                                                          test=True)
+                                                                          test=False)
             assert (len(final_id_to_class) == len(final_video_vals))
             id_to_class = final_id_to_class.astype('>f4')
-            id_to_class.tofile('/data2/yt8m/storage/lstm_v2v3_100/lstm_v2v3_100.seg.test' + '.bin')
-            np.savetxt('/data2/yt8m/storage/lstm_v2v3_100/lstm_v2v3_100.seg.test' + '.txt', final_video_vals,
+            id_to_class.tofile('/data2/yt8m/storage/gcn_90_10/gcn_90_10.seg.valid' + '.bin')
+            np.savetxt('/data2/yt8m/storage/gcn_90_10/gcn_90_10.seg.valid' + '.txt', final_video_vals,
                        delimiter=',', fmt="%s")
             return
 
@@ -98,6 +99,9 @@ class Validation:
 
         self.write_output_to_file(final_video_vals, final_predictions, output_file)
 
+    def validation_pipeline(self, generate_blend_file=False, top_n=100_000, output_file="data/submission.csv"):
+
+        self.validation_helper(generate_blend_file, top_n, output_file)
         return metric.run_metric(output_file, self.label_cache, top_n)
 
     def add_missing_values(self, video_preds, seg_names, test=False):

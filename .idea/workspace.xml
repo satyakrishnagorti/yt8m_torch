@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec665e2a-d995-4a58-8570-c87209eb52e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/inference.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/losses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metric.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/graph.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/lstm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/simple_frame_level_models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/transformer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/average_precision_calculator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/mean_average_precision_calculator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/validate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataloaders/tfrecord_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataloaders/tfrecord_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validate.py" beforeDir="false" afterPath="$PROJECT_DIR$/validate.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +21,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/models/simple_frame_level_models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="416">
+                <state relative-caret-position="390">
                   <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
@@ -42,8 +33,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/models/graph.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="362">
-                  <caret line="52" selection-start-line="52" selection-end-line="52" />
+                <state relative-caret-position="285">
+                  <caret line="68" column="59" lean-forward="true" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -54,41 +45,35 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/torch/nn/parameter.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="390">
-                  <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/train.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2678">
-                  <caret line="130" column="74" selection-start-line="130" selection-start-column="74" selection-end-line="130" selection-end-column="74" />
-                  <folding>
-                    <element signature="e#0#9#0" expanded="true" />
-                    <element signature="e#1940#2632#0" />
-                    <element signature="e#1776#2223#0" />
-                  </folding>
+                <state relative-caret-position="624">
+                  <caret line="25" column="68" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/inference.py">
-              <provider selected="true" editor-type-id="text-editor" />
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="234">
+                  <caret line="9" column="52" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
+                </state>
+              </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/validate.py">
+            <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/matplotlib/tests/test_units.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="909">
-                  <caret line="100" column="25" selection-start-line="100" selection-start-column="25" selection-end-line="100" selection-end-column="25" />
-                  <folding>
-                    <element signature="e#93#104#0" expanded="true" />
-                    <element signature="e#3603#3835#0" />
-                    <element signature="e#3874#4173#0" />
-                  </folding>
+                <state relative-caret-position="234">
+                  <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/torch/nn/modules/module.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="20436">
+                  <caret line="793" column="8" selection-start-line="793" selection-start-column="8" selection-end-line="793" selection-end-column="8" />
                 </state>
               </provider>
             </entry>
@@ -96,7 +81,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/metric.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1013">
+                <state relative-caret-position="3952">
                   <caret line="154" column="58" selection-start-line="154" selection-start-column="11" selection-end-line="154" selection-end-column="58" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
@@ -113,7 +98,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/losses.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="234">
+                <state relative-caret-position="208">
                   <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
@@ -122,15 +107,27 @@
               </provider>
             </entry>
           </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/train.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="311">
+                  <caret line="53" column="9" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/dataloaders/tfrecord_dataset.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="286">
-                  <caret line="161" column="43" selection-start-line="161" selection-start-column="43" selection-end-line="161" selection-end-column="43" />
+                <state relative-caret-position="754">
+                  <caret line="44" selection-start-line="39" selection-end-line="44" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
                   </folding>
@@ -138,11 +135,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/utils/utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="598">
-                  <caret line="23" selection-start-line="23" selection-end-line="23" />
+                <state relative-caret-position="1352">
+                  <caret line="52" column="43" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -151,9 +148,21 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/validate.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2184">
+                  <caret line="89" column="48" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
+                  <folding>
+                    <element signature="e#93#104#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/torch/__init__.pyi">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
+                <state relative-caret-position="36738">
                   <caret line="1437" column="4" selection-start-line="1437" selection-start-column="4" selection-end-line="1437" selection-end-column="4" />
                 </state>
               </provider>
@@ -165,12 +174,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>torch.tensor</find>
-      <find>video_matrix</find>
-      <find>max_frames</find>
-      <find>features_sizes</find>
-      <find>torch.ones_like</find>
-      <find>sparse.FloatTensor</find>
       <find>set</find>
       <find>label_indices</find>
       <find>train-dir</find>
@@ -189,12 +192,18 @@
       <find>metric</find>
       <find>get_feature</find>
       <find>numpy</find>
-      <find>batch_vid</find>
       <find>reset</find>
-      <find>sqrt</find>
       <find>glob</find>
       <find>video_id_batch_val</find>
+      <find>batch_vid</find>
+      <find>sqrt</find>
+      <find>generate_blen</find>
       <find>validate_file</find>
+      <find>generate</find>
+      <find>save_dir</find>
+      <find>get_train_data_loader</find>
+      <find>get_val_data_loader</find>
+      <find>save_model</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -211,16 +220,17 @@
         <option value="$PROJECT_DIR$/utils/average_precision_calculator.py" />
         <option value="$PROJECT_DIR$/utils/mean_average_precision_calculator.py" />
         <option value="$PROJECT_DIR$/metric.py" />
+        <option value="$PROJECT_DIR$/inference.py" />
         <option value="$PROJECT_DIR$/validate.py" />
-        <option value="$PROJECT_DIR$/utils/utils.py" />
         <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/utils/utils.py" />
         <option value="$PROJECT_DIR$/models/graph.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="251" />
-    <option name="width" value="3440" />
+    <option name="width" value="3430" />
     <option name="height" value="1413" />
   </component>
   <component name="ProjectView">
@@ -228,7 +238,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -244,18 +253,13 @@
             <path>
               <item name="yt8m_torch" type="b2602c69:ProjectViewProjectNode" />
               <item name="yt8m_torch" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="gcn_conv_model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yt8m_torch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yt8m_torch" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -371,10 +375,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="251" width="3440" height="1413" extended-state="6" />
+    <frame x="0" y="252" width="3440" height="1412" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18642084" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18642084" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -385,7 +389,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32990506" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32990506" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -515,30 +519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/torch/__init__.pyi">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="1437" column="4" selection-start-line="1437" selection-start-column="4" selection-end-line="1437" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/torch/nn/modules/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1413">
-          <caret line="1052" column="8" selection-start-line="1052" selection-start-column="8" selection-end-line="1052" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/losses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/average_precision_calculator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -553,9 +533,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/misc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models/simple_frame_level_models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
+        <state relative-caret-position="390">
           <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -565,45 +552,59 @@
     </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/torch/nn/parameter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+        <state relative-caret-position="624">
+          <caret line="25" column="68" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataloaders/tfrecord_dataset.py">
+    <entry file="file://$PROJECT_DIR$/inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="161" column="43" selection-start-line="161" selection-start-column="43" selection-end-line="161" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="234">
+          <caret line="9" column="52" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/misc.py">
+    <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/matplotlib/tests/test_units.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+        <state relative-caret-position="234">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/lstm.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/utils.py">
+    <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/torch/nn/modules/module.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="20436">
+          <caret line="793" column="8" selection-start-line="793" selection-start-column="8" selection-end-line="793" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/metric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3952">
+          <caret line="154" column="58" selection-start-line="154" selection-start-column="11" selection-end-line="154" selection-end-column="58" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/metric.py">
+    <entry file="file://$PROJECT_DIR$/models/lstm.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/losses.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1013">
-          <caret line="154" column="58" selection-start-line="154" selection-start-column="11" selection-end-line="154" selection-end-column="58" />
+        <state relative-caret-position="208">
+          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="53" column="9" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -612,35 +613,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/validate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="909">
-          <caret line="100" column="25" selection-start-line="100" selection-start-column="25" selection-end-line="100" selection-end-column="25" />
+        <state relative-caret-position="2184">
+          <caret line="89" column="48" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
           <folding>
             <element signature="e#93#104#0" expanded="true" />
-            <element signature="e#3603#3835#0" />
-            <element signature="e#3874#4173#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inference.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://$USER_HOME$/anaconda3/envs/torch1.2/lib/python3.7/site-packages/torch/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2678">
-          <caret line="130" column="74" selection-start-line="130" selection-start-column="74" selection-end-line="130" selection-end-column="74" />
+        <state relative-caret-position="36738">
+          <caret line="1437" column="4" selection-start-line="1437" selection-start-column="4" selection-end-line="1437" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1352">
+          <caret line="52" column="43" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#1940#2632#0" />
-            <element signature="e#1776#2223#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataloaders/tfrecord_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="44" selection-start-line="39" selection-end-line="44" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="285">
+          <caret line="68" column="59" lean-forward="true" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
